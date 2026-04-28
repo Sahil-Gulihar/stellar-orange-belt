@@ -3,10 +3,10 @@
 Welcome to my submission for the Level 3 Orange Belt challenge! This project is a complete end-to-end mini-dApp built on the Stellar network using Soroban Smart Contracts.
 
 ## 🚀 Live Demo
-**[Live Demo Link](https://orange-belt-level3.vercel.app)** *(Placeholder)*
+**[Live Demo Link](https://stellar-orange-belt-plum.vercel.app/)** *https://stellar-orange-belt-plum.vercel.app/*
 
 ## 📹 Demo Video
-**[1-Minute Demo Video](https://youtube.com/...)** *(Placeholder)*
+**[1-Minute Demo Video](https://cap.so/s/0eqvph083hppfev)** *(Demo Here)*
 
 ## 🛠 Features
 - **Smart Contract:** Written in Rust using Soroban SDK.
