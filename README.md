@@ -43,6 +43,9 @@ test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 └── package.json          # Frontend Dependencies
 ```
 
+## Project Screenshots
+![alt text](image.png)
+
 ## 🛠 Development Setup
 
 ### Smart Contract
