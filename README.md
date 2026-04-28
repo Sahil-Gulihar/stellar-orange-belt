@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🟠 Orange Belt - Level 3: Soroban Tip Jar dApp
 
-## Getting Started
+Welcome to my submission for the Level 3 Orange Belt challenge! This project is a complete end-to-end mini-dApp built on the Stellar network using Soroban Smart Contracts.
 
-First, run the development server:
+## 🚀 Live Demo
+**[Live Demo Link](https://orange-belt-level3.vercel.app)** *(Placeholder)*
 
+## 📹 Demo Video
+**[1-Minute Demo Video](https://youtube.com/...)** *(Placeholder)*
+
+## 🛠 Features
+- **Smart Contract:** Written in Rust using Soroban SDK.
+- **Wallet Connection:** Integrated with Freighter Wallet.
+- **Loading States:** UI indicators for wallet connection and transaction processing.
+- **Progress Indicators:** Visual feedback during transaction simulation.
+- **Caching:** Recent tips are cached locally in the browser for persistent history.
+- **Responsive Design:** Built with Tailwind CSS and Lucide icons.
+
+## 🧪 Testing
+The smart contract includes 4 comprehensive tests covering initialization, tipping, and owner withdrawals.
+
+### Test Output
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+running 4 tests
+test test::test_initialize ... ok
+test test::test_already_initialized - should panic ... ok
+test test::test_tip ... ok
+test test::test_withdraw ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📂 Project Structure
+```
+├── app/                  # Next.js App Router
+├── components/           # React Components (TipJar, etc.)
+├── contracts/            # Soroban Smart Contracts (Rust)
+│   └── tip-jar/
+│       └── src/
+│           ├── lib.rs    # Contract Logic
+│           └── test.rs   # Contract Tests
+├── lib/                  # Stellar & Soroban Utilities
+└── package.json          # Frontend Dependencies
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠 Development Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Smart Contract
+1. Navigate to the contract directory:
+   ```bash
+   cd contracts/tip-jar/contracts/tip-jar
+   ```
+2. Run tests:
+   ```bash
+   cargo test
+   ```
+3. Build contract:
+   ```bash
+   stellar contract build
+   ```
 
-## Learn More
+### Frontend
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Run development server:
+   ```bash
+   npm run dev
+   ```
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-To learn more about Next.js, take a look at the following resources:
+## 📜 Smart Contract Logic
+The Tip Jar contract supports:
+- `initialize`: Sets the owner and the token (XLM) to be accepted.
+- `tip`: Allows users to send XLM to the jar.
+- `get_total`: Returns the total amount of tips collected.
+- `withdraw`: Allows the owner to withdraw funds from the jar.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Built with ❤️ for the Stellar Community.
