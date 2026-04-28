@@ -2,21 +2,29 @@
 
 import { useState, useEffect } from "react";
 import { Coins, Wallet, Send, Loader2, Trophy } from "lucide-react";
-import { getWalletAddress, checkFreighter } from "@/lib/stellar";
+import { getWalletAddress, checkFreighter, getJarTotal } from "@/lib/stellar";
 
 export default function TipJar() {
   const [address, setAddress] = useState<string | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [amount, setAmount] = useState("");
   const [isTipping, setIsTipping] = useState(false);
-  const [totalDonated, setTotalDonated] = useState(1250); // Mock data for demo
+  const [totalDonated, setTotalDonated] = useState(0);
   const [recentTips, setRecentTips] = useState<{address: string, amount: string, time: string}[]>([]);
 
   useEffect(() => {
-    const savedTips = localStorage.getItem("recentTips");
-    if (savedTips) {
-      setRecentTips(JSON.parse(savedTips));
-    }
+    // Load initial data
+    const loadData = async () => {
+      const total = await getJarTotal();
+      setTotalDonated(total);
+      
+      const savedTips = localStorage.getItem("recentTips");
+      if (savedTips) {
+        setRecentTips(JSON.parse(savedTips));
+      }
+    };
+    
+    loadData();
   }, []);
 
   const connectWallet = async () => {
@@ -28,7 +36,11 @@ export default function TipJar() {
         return;
       }
       const addr = await getWalletAddress();
-      setAddress(addr);
+      if (addr) {
+        setAddress(addr);
+      } else {
+        alert("Failed to get wallet address. Is Freighter unlocked?");
+      }
     } catch (e) {
       console.error(e);
     } finally {
@@ -54,7 +66,7 @@ export default function TipJar() {
       setTotalDonated(prev => prev + parseFloat(amount));
       setAmount("");
       setIsTipping(false);
-      alert("Tip successful! (Simulated)");
+      alert("Tip successful! (Simulated for Demo)");
     }, 2000);
   };
 
