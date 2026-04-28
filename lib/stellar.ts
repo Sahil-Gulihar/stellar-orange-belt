@@ -18,27 +18,31 @@ export const server = new rpc.Server(RPC_URL);
 
 export async function checkFreighter() {
   try {
-    return await isConnected();
+    const connected = await isConnected();
+    return !!connected;
   } catch (e) {
+    console.error("Error checking Freighter connection:", e);
     return false;
   }
 }
 
 export async function getWalletAddress() {
   try {
-    const { address } = await getAddress();
-    return address;
+    const response = await getAddress();
+    if (response && response.address) {
+      return response.address;
+    }
+    return null;
   } catch (e) {
+    console.error("Freighter getAddress error:", e);
     return null;
   }
 }
 
 export async function getJarTotal() {
-  // For demo purposes, we return a mock value if the contract isn't deployed on testnet
-  return 1250;
+  return 1250; // Mock for demo
 }
 
 export async function callContract(functionName: string, args: any[] = []) {
-  // Implementation for contract calls
   console.log(`Calling ${functionName} with`, args);
 }

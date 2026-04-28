@@ -13,7 +13,6 @@ export default function TipJar() {
   const [recentTips, setRecentTips] = useState<{address: string, amount: string, time: string}[]>([]);
 
   useEffect(() => {
-    // Load initial data
     const loadData = async () => {
       const total = await getJarTotal();
       setTotalDonated(total);
@@ -28,21 +27,25 @@ export default function TipJar() {
   }, []);
 
   const connectWallet = async () => {
+    if (isConnecting) return;
     setIsConnecting(true);
+    
     try {
       const hasFreighter = await checkFreighter();
       if (!hasFreighter) {
-        alert("Please install Freighter wallet");
+        alert("Freighter wallet not found. Please install the extension.");
         return;
       }
+      
       const addr = await getWalletAddress();
       if (addr) {
         setAddress(addr);
       } else {
-        alert("Failed to get wallet address. Is Freighter unlocked?");
+        alert("Could not connect to Freighter. Please ensure it is unlocked and you have granted permission to this site.");
       }
     } catch (e) {
-      console.error(e);
+      console.error("Connection handler error:", e);
+      alert("An unexpected error occurred while connecting.");
     } finally {
       setIsConnecting(false);
     }
@@ -50,10 +53,10 @@ export default function TipJar() {
 
   const handleTip = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!address || !amount) return;
+    if (!address || !amount || isTipping) return;
 
     setIsTipping(true);
-    // Simulate transaction
+    // Simulate transaction for demo quality
     setTimeout(() => {
       const newTip = {
         address: address.substring(0, 6) + "..." + address.substring(address.length - 4),
@@ -66,7 +69,7 @@ export default function TipJar() {
       setTotalDonated(prev => prev + parseFloat(amount));
       setAmount("");
       setIsTipping(false);
-      alert("Tip successful! (Simulated for Demo)");
+      alert("Tip successful! (Simulation)");
     }, 2000);
   };
 
